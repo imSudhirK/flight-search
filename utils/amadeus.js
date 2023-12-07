@@ -13,4 +13,17 @@ async function getAirportsByCity(cityName) {
   });
 }
 
-module.exports = { getAirportsByCity };
+async function getFlightsByDateRoute(
+  departureDate,
+  departureLocation,
+  arrivalLocation,
+) {
+  return amadeus.shopping.flightOffersSearch.get({
+    originLocationCode: departureLocation,
+    destinationLocationCode: arrivalLocation,
+    departureDate: departureDate,
+    adults: "1",
+  });
+}
+
+module.exports = { getAirportsByCity, getFlightsByDateRoute };
