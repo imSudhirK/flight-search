@@ -9,20 +9,20 @@ const amadeus = new Amadeus({
 async function getAirportsByCity(cityName) {
   return amadeus.referenceData.locations.get({
     keyword: cityName,
-    subType: "CITY,AIRPORT",
+    subType: "AIRPORT",
   });
 }
 
-async function getFlightsByDateRoute(
-  departureDate,
-  departureLocation,
-  arrivalLocation,
-) {
+async function getFlightsByDateRoute(payload) {
   return amadeus.shopping.flightOffersSearch.get({
-    originLocationCode: departureLocation,
-    destinationLocationCode: arrivalLocation,
-    departureDate: departureDate,
-    adults: "1",
+    originLocationCode: payload.departureLocation,
+    destinationLocationCode: payload.arrivalLocation,
+    departureDate: payload.departureDate,
+    adults: payload.adults,
+    children: payload.children || 0,
+    infants: payload.infants || 0,
+    travelClass: payload.travelClass,
+    currencyCode: "INR",
   });
 }
 

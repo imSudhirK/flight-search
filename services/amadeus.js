@@ -9,12 +9,8 @@ async function getAirports(cityName) {
   return resp.data;
 }
 
-async function getFlights(departureDate, departureLocation, arrivalLocation) {
-  const resp = await getFlightsByDateRoute(
-    departureDate,
-    departureLocation,
-    arrivalLocation,
-  );
+async function getFlights(payload) {
+  const resp = await getFlightsByDateRoute(payload);
   if (!resp || !resp.data) return new Error("Dependency Error");
   return resp.data;
 }

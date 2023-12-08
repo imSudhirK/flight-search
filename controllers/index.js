@@ -18,13 +18,8 @@ async function getFlights(req, res) {
     if (validateQuery.error) {
       return res.status(400).send({ error: validateQuery.error.message });
     }
-    
-    const { departureDate, departureLocation, arrivalLocation } = req.body;
-    const resp = await amadeusService.getFlights(
-      departureDate,
-      departureLocation,
-      arrivalLocation,
-    );
+
+    const resp = await amadeusService.getFlights(req.body);
     if (resp instanceof Error) return res.status(422).send(resp.message);
     return res.status(200).send(resp);
   } catch (err) {
